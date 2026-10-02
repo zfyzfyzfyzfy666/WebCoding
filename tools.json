@@ -1,0 +1,65 @@
+{
+  "version": 2,
+  "limits": {
+    "command_timeout_ms": 60000,
+    "max_output_chars": 200000,
+    "max_file_bytes": 2097152,
+    "max_processes": 4,
+    "process_log_chars": 200000,
+    "search_max_results": 1000,
+    "search_max_files": 10000,
+    "image_max_edge": 1600,
+    "image_max_bytes": 6291456,
+    "agent_max_bytes": 32768
+  },
+  "tools": {
+    "list_directory": {
+      "enabled": true,
+      "description": "List files in the mapped folder; links outside it are not followed."
+    },
+    "read_files": {
+      "enabled": true,
+      "description": "Read UTF-8 text files, optionally selecting a line range. Size limits are configurable in tools.json."
+    },
+    "write_file": {
+      "enabled": true,
+      "description": "Create or overwrite a UTF-8 file inside the mapped folder."
+    },
+    "edit_file": {
+      "enabled": true,
+      "description": "Replace exactly one occurrence of old_text. Missing or ambiguous matches fail without modifying the file."
+    },
+    "run_command": {
+      "enabled": true,
+      "description": "Run a PowerShell command with its working directory inside the mapped folder. NOT a security sandbox: commands have the current Windows user permissions and can access other locations."
+    },
+    "search_files": {
+      "enabled": true,
+      "description": "Search filenames or UTF-8 text using literal matching. Supports basic glob filtering and snapshot pagination. Hidden and generated folders are skipped by default; returns explicit truncation/skip counts."
+    },
+    "manage_files": {
+      "enabled": true,
+      "description": "Create a directory, move/rename without overwriting, or move an item into the project .webcoding-trash folder. Delete requires confirm_delete=true; root operations and permanent deletion are forbidden."
+    },
+    "start_process": {
+      "enabled": true,
+      "description": "Start a persistent foreground command in the mapped folder. Returns an owned process_id and initial logs. Use this for servers and watchers, not run_command. Child processes are stopped when the service exits."
+    },
+    "read_process_output": {
+      "enabled": true,
+      "description": "Read incremental output from an owned process_id using an absolute character cursor. Can wait for new output or process exit. Reports dropped old logs explicitly. Omit process_id to list this service's tasks."
+    },
+    "stop_process": {
+      "enabled": true,
+      "description": "Stop only a task created by this service, including its child process tree. Accepts an owned process_id, never an arbitrary system PID."
+    },
+    "read_image": {
+      "enabled": true,
+      "description": "Read a PNG/JPEG/BMP/GIF file inside the mapped folder and return an MCP image block, resized if needed. No URL fetching. Requires a client that accepts image tool results."
+    },
+    "capture_window": {
+      "enabled": true,
+      "description": "List windows or capture one selected by hwnd, PID, process name or title. Ambiguous matches return candidates. Does not activate/restore windows unless allow_activate=true. Screen capture requires explicit activation permission; protected/minimized/GPU windows may fail or be incomplete."
+    }
+  }
+}
